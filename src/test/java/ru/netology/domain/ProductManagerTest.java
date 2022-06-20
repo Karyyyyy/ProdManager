@@ -135,5 +135,47 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+    @Test
+    public void SearchEmptyProducts() {
+        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager(repository);
+
+        manager.findAll();
+
+        Product[] actual = manager.findAll();
+        Product[] expected = {};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldOneProduct() {
+        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager(repository);
+
+        manager.add(books1);
+
+        manager.removeById(123);
+        manager.findAll();
+
+        Product[] actual = manager.findAll();
+        Product[] expected = {};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldTwoProducts() {
+        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager(repository);
+
+        manager.add(books1);
+        manager.add(books2);
+
+        manager.removeById(456);
+        manager.findAll();
+
+        Product[] actual = manager.findAll();
+        Product[] expected = {books1};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 }
+
 
