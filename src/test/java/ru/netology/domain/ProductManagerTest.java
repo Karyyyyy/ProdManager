@@ -1,4 +1,5 @@
 package ru.netology.domain;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.manager.ProductManager;
@@ -47,6 +48,7 @@ public class ProductManagerTest {
 
         Product[] actual = manager.searchBy("13");
         Product[] expected = {smartphone1};
+
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -135,6 +137,7 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void SearchEmptyProducts() {
         ProductRepository repository = new ProductRepository();
@@ -146,6 +149,7 @@ public class ProductManagerTest {
         Product[] expected = {};
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldOneProduct() {
         ProductRepository repository = new ProductRepository();
@@ -160,6 +164,7 @@ public class ProductManagerTest {
         Product[] expected = {};
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldTwoProducts() {
         ProductRepository repository = new ProductRepository();
@@ -176,6 +181,38 @@ public class ProductManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSearchBy6() {
+        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager(repository);
+        manager.add(books1);
+        manager.add(books2);
+        manager.add(books3);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+        manager.add(smartphone3);
+
+        Product[] actual = manager.searchBy("е");
+        Product[] expected = {books1, books2, books3};
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldSearchBy7() {
+        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager(repository);
+        manager.add(books1);
+        manager.add(books2);
+        manager.add(books3);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+        manager.add(smartphone3);
+
+        Product[] actual2 = manager.searchBy("n");
+        Product[] expected2 = {smartphone1, smartphone2};
+        Assertions.assertArrayEquals(expected2, actual2);
+    }
 }
 
 
